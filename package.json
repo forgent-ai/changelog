@@ -1,20 +1,25 @@
 {
-  "name": "typescript-action",
-  "description": "GitHub Actions TypeScript template",
-  "version": "0.0.0",
-  "author": "",
+  "name": "forgent-changelog-action",
+  "description": "Generates changelog and AI-powered release summaries from feature PRs",
+  "version": "2.0.0",
+  "author": "Forgent",
   "type": "module",
-  "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
+  "private": false,
+  "homepage": "https://github.com/forgent/changelog",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/forgent/changelog.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
+    "url": "https://github.com/forgent/changelog/issues"
   },
   "keywords": [
-    "actions"
+    "actions",
+    "changelog",
+    "release",
+    "ai",
+    "gemini",
+    "github"
   ],
   "exports": {
     ".": "./dist/index.js"
@@ -37,13 +42,18 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/artifact": "^2.3.2",
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "@types/node-fetch": "^2.6.13",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@eslint/compat": "^1.3.2",
     "@github/local-action": "^5.1.0",
     "@jest/globals": "^30.0.5",
     "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/jest": "^30.0.0",

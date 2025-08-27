@@ -1,23 +1,50 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+name: Changelog Generator with AI Summary
+description: Generates changelog and AI-powered release summaries from feature PRs
+author: Forgent
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: heart
-  color: red
+  icon: file-text
+  color: blue
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  github-token:
+    description: GitHub token for API access
     required: true
-    default: '1000'
+  gemini-api-key:
+    description: Gemini API key for AI summary generation
+    required: true
+  grouping-labels:
+    description: Comma-separated list of labels to group PRs by
+    required: true
+  require-feature-label:
+    description: Whether PRs must have the 'feature' label to be included
+    required: false
+    default: 'false'
 
 # Define your outputs here.
 outputs:
-  time:
-    description: Your output description here
+  release-date:
+    description: Current date in YYYY-MM-DD format
+  release-timestamp:
+    description: Timestamp for release tagging in YYYY-MM-DD-HHMMSS format
+  has-previous-release:
+    description: Boolean indicating if a previous release exists
+  previous-tag:
+    description: Tag of the previous release (if exists)
+  previous-release-date:
+    description: Creation date of previous release (if exists)
+  grouped-summaries:
+    description: JSON string with grouped summaries by labels
+  label-groups:
+    description: Comma-separated list of label groups found
+  artifact-name:
+    description: Name of the artifact containing detailed grouped outputs
+  total-prs:
+    description: Total number of PRs processed
+  has-content:
+    description: Boolean indicating if any content was found
 
 runs:
   using: node24
