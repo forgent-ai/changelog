@@ -1,5 +1,6 @@
 name: Changelog Generator with AI Summary
-description: Generates changelog and AI-powered release summaries from feature PRs
+description:
+  Generates changelog and AI-powered release summaries from feature PRs
 author: Forgent
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.

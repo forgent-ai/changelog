@@ -14,7 +14,12 @@ const config = {
     sourcemap: true,
     inlineDynamicImports: true
   },
-  plugins: [json(), typescript(), nodeResolve({ preferBuiltins: true }), commonjs()]
+  plugins: [
+    json(),
+    typescript(),
+    nodeResolve({ preferBuiltins: true }),
+    commonjs()
+  ]
 }
 
 export default config
