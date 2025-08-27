@@ -52,13 +52,40 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Test Local Action
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          gemini-api-key:
+            ${{ secrets.GEMINI_API_KEY || 'fake-key-for-testing' }}
+          grouping-labels: 'test,ci'
+          require-feature-label: 'false'
+        continue-on-error: true
 
-      - name: Print Output
+      - name: Print Outputs
         id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+        run: |
+          echo "Action completed with status: ${{ steps.test-action.outcome }}"
+          echo "Release date: ${{ steps.test-action.outputs.release-date }}"
+          echo "Release timestamp: ${{ steps.test-action.outputs.release-timestamp }}"
+          echo "Has previous release: ${{ steps.test-action.outputs.has-previous-release }}"
+          echo "Total PRs: ${{ steps.test-action.outputs.total-prs }}"
+          echo "Label groups: ${{ steps.test-action.outputs.label-groups }}"
+          echo "Has content: ${{ steps.test-action.outputs.has-content }}"
+
+      - name: Validate Basic Outputs
+        run: |
+          # Check that basic outputs are set even if API calls fail
+          if [ -z "${{ steps.test-action.outputs.release-date }}" ]; then
+            echo "❌ release-date output not set"
+            exit 1
+          fi
+          if [ -z "${{ steps.test-action.outputs.release-timestamp }}" ]; then
+            echo "❌ release-timestamp output not set"
+            exit 1
+          fi
+          echo "✅ Basic outputs are properly set"
